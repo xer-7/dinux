@@ -17,7 +17,7 @@ func HandleMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
         case "!help":
 	       	s.ChannelMessageSendReply(
 				m.ChannelID,
-				"`!mkdir (directory name)` > creates a new directory\n`!rmdir (directory name)` > removes an existing directory",
+				"`!mkdir (directory name)` > creates a new directory\n`!rmdir (directory name)` > removes an existing directory\n`!touch (file name)` > creates a new file\n`!rm (file name)` > removes an existing file",
 				m.Reference(),
 			)
       		break
