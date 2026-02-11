@@ -16,6 +16,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+
 	var Token string = os.Getenv("DISCORD_TOKEN")
 	if Token == "" {
 		fmt.Println("[-] Erro: Nenhum token fornecido. Verifique a .env")
@@ -23,7 +25,8 @@ func main() {
 	}
 	root, err := discordgo.New("Bot " + Token)
 
-	root.AddHandler(handlers.HandleMessage())
+	root.AddHandler(handlers.OnReady)
+	root.AddHandler(handlers.HandleMessage)
 
 	err = root.Open()
 	if err != nil {
@@ -31,7 +34,6 @@ func main() {
 		return
 	}
 	defer root.Close()
-
 
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
